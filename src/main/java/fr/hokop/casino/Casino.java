@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Casino extends JavaPlugin{
 
     @Override
-    public void onDisable() {
-        System.out.println("test");
+    public void onEnable(){
+
     }
 }
