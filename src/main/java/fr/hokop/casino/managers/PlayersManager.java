@@ -1,7 +1,11 @@
 package fr.hokop.casino.managers;
 
 import fr.hokop.casino.Casino;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.entity.Player;
+
+import java.util.HashMap;
 
 /**
  * Created by vgfab on 29/10/2016.
@@ -10,21 +14,20 @@ public class PlayersManager{
 
     private Player player;
 
+    @Getter private static HashMap<Player, PlayersManager> playersList = new HashMap<>();
+
+    @Getter @Setter private Integer jetons;
+
     /**
-     * Constructeur pour créer un joueur custom
+     *constructor for create a custom player
      *
-     * @param player    On définit le joueur a qui on va set des donnée
+     * @param player    initialization of player
      */
     public PlayersManager(Player player){
         this.player = player;
 
-        initPlayer();
-    }
+        this.jetons = 1000;
 
-    /**
-     * On Initialize les données du joueur
-     */
-    public void initPlayer(){
-        player.teleport(Casino.getInstance().getSettings().getLocations()[0]);
+        playersList.put(player, this);
     }
 }

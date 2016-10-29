@@ -1,9 +1,8 @@
 package fr.hokop.casino;
 
-import fr.hokop.casino.managers.EntitiesManager;
 import fr.hokop.casino.managers.EventsManager;
+import fr.hokop.casino.managers.PlayersManager;
 import lombok.Getter;
-import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -13,15 +12,23 @@ public class Casino extends JavaPlugin{
 
     @Getter private static Casino instance;
     @Getter private Settings settings;
+    @Getter private Entities entities;
 
     @Override
     public void onEnable(){
         instance = this;
         settings = new Settings();
+        entities = new Entities();
+
 
         settings.InitSettings();
+        entities.createEntities();
 
-        new EntitiesManager(EntityType.ENDERMAN, settings.getLocations()[1], "§aVigile");
         new EventsManager();
+    }
+
+    @Override
+    public void onDisable() {
+        PlayersManager.getPlayersList().clear();
     }
 }
